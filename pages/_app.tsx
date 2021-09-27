@@ -1,7 +1,7 @@
-import type { AppProps } from "next/app";
-import "assets/reset.css";
+import type { AppProps } from 'next/app'
+import 'public/assets/reset.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+	return <Component {...pageProps} />
 }
-export default MyApp;
+export default MyApp

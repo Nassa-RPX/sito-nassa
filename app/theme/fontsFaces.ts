@@ -1,8 +1,7 @@
+import nassaBold from 'public/assets/font/nassa-bold.otf'
+import nassaLight from 'public/assets/font/nassa-light.otf'
+import nassaRegular from 'public/assets/font/nassa-regular.otf'
 import { css } from 'styled-components'
-
-import nassaBold from 'assets/font/nassa-bold.otf'
-import nassaLight from 'assets/font/nassa-light.otf'
-import nassaRegular from 'assets/font/nassa-regular.otf'
 
 const fontsFaces = {
 	regular: css`

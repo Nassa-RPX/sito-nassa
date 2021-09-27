@@ -12,6 +12,8 @@ export const GlobalStyle = createGlobalStyle`
    ${fontsFaces.light}
 
    body {
+	   width: 100vw;
+	   height: 100vh;
 	   display: flex;
 	   flex-direction: column;
 	   font-family: ${({ theme }) => theme.typo.family.main};
