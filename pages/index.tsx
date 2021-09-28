@@ -1,13 +1,15 @@
 import Head from 'next/head'
 
-import Navbar from 'components/Navbar'
-import Root from 'components/Root'
+import { title } from 'app/data/info'
+
+import { Navbar } from 'components/Navigation/Navbar'
+import { Root } from 'components/Root'
 
 export default function Home() {
 	return (
 		<Root>
 			<Head>
-				<title>Nassa</title>
+				<title>{title}</title>
 				<meta name="description" content="Nassa" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

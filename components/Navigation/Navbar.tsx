@@ -1,21 +1,33 @@
+import Link from 'next/link'
 import React from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
-const Navbar = () => {
+import { MobileNav } from './MobileNav/MobileNav'
+
+import { pages } from 'app/data/pages'
+
+export const Navbar = () => {
 	return (
 		<Base>
 			<Background>
 				{/* <TigullioBox src={'../assets/map2.svg'} /> */}
 				<TigullioBox src={'../assets/tigullio.svg'} />
-				{/* <Tigullio /> */}
 			</Background>
-			<Nav>Navbar</Nav>
+			<Nav>
+				<MobileNav />
+
+				<Pages>
+					{pages.map((page, i) => (
+						<Link key={i} href={page.url}>
+							{page.name}
+						</Link>
+					))}
+				</Pages>
+			</Nav>
 		</Base>
 	)
 }
-
-export default Navbar
 
 const Base = styled.div`
 	position: relative;
@@ -38,7 +50,7 @@ const Background = styled.div`
 	}
 
 	${up('lg')} {
-		top: -120px;
+		top: -20vh;
 	}
 `
 
@@ -51,9 +63,25 @@ const TigullioBox = styled.img`
 	}
 `
 
-const Nav = styled.nav`
+const Nav = styled.section`
 	position: absolute;
 	right: ${({ theme }) => theme.spacing(2)};
 	top: ${({ theme }) => theme.spacing(2)};
 	z-index: 2;
+`
+
+const Pages = styled.div`
+	display: none;
+
+	${up('xl')} {
+		display: flex;
+	}
+
+	& a {
+		text-transform: uppercase;
+		color: ${({ theme }) => theme.palette.lightBlueNassa};
+		font-family: ${({ theme }) => theme.typo.family.heading};
+		/* font-size: ${({ theme }) => theme.typo.size.heading3}; */
+		margin-left: ${({ theme }) => theme.spacing(2)};
+	}
 `

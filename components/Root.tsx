@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
 
 `
 
-const Root = ({ children }: Children) => {
+export const Root = ({ children }: Children) => {
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
@@ -30,5 +30,3 @@ const Root = ({ children }: Children) => {
 		</ThemeProvider>
 	)
 }
-
-export default Root
