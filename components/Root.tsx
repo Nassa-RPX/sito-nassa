@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+
+import { Container } from './Container'
+import { Navbar } from './Navigation/Navbar'
 
 import { Children } from 'app/shared/types'
 import theme from 'app/theme'
@@ -23,10 +26,27 @@ export const GlobalStyle = createGlobalStyle`
 `
 
 export const Root = ({ children }: Children) => {
+	const ref = useRef<HTMLDivElement>(null)
+
+	const [navHeight, setNavHeight] = useState<number>(0)
+
+	useEffect(() => {
+		const getHeight = () => {
+			const { current } = ref
+			if (!current || !current.clientHeight) return
+			setNavHeight(current.clientHeight - current.clientHeight * 0.4)
+		}
+
+		getHeight()
+	}, [])
+
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
-			{children}
+			<>
+				<Navbar ref={ref} />
+				<Container margin={navHeight}>{children}</Container>
+			</>
 		</ThemeProvider>
 	)
 }

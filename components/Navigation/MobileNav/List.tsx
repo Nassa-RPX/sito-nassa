@@ -6,11 +6,12 @@ import { MenuItem } from './Item'
 import { listVariant } from './variants'
 
 import { pages } from 'app/data/pages'
+import { MenuToggle } from 'app/shared/types'
 
-export const Navigation = () => (
+export const Navigation = ({ toggle }: MenuToggle) => (
 	<PagesList variants={listVariant}>
 		{pages.map((page, idx) => (
-			<MenuItem page={page} key={idx} />
+			<MenuItem page={page} key={idx} toggle={toggle} />
 		))}
 	</PagesList>
 )

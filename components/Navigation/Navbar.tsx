@@ -1,5 +1,6 @@
+import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
@@ -7,10 +8,12 @@ import { MobileNav } from './MobileNav/MobileNav'
 
 import { pages } from 'app/data/pages'
 
-export const Navbar = () => {
+export const Navbar = React.forwardRef<HTMLDivElement>((props, ref) => {
+	const router = useRouter()
+
 	return (
 		<Base>
-			<Background>
+			<Background ref={ref}>
 				{/* <TigullioBox src={'../assets/map2.svg'} /> */}
 				<TigullioBox src={'../assets/tigullio.svg'} />
 			</Background>
@@ -19,15 +22,19 @@ export const Navbar = () => {
 
 				<Pages>
 					{pages.map((page, i) => (
-						<Link key={i} href={page.url}>
-							{page.name}
+						<Link key={i} href={page.url} passHref>
+							<span className={router.pathname === page.url ? 'active' : ''}>
+								{page.name}
+							</span>
 						</Link>
 					))}
 				</Pages>
 			</Nav>
 		</Base>
 	)
-}
+})
+
+Navbar.displayName = 'NavBar'
 
 const Base = styled.div`
 	position: relative;
@@ -77,11 +84,16 @@ const Pages = styled.div`
 		display: flex;
 	}
 
-	& a {
+	& span {
+		cursor: pointer;
 		text-transform: uppercase;
 		color: ${({ theme }) => theme.palette.lightBlueNassa};
 		font-family: ${({ theme }) => theme.typo.family.heading};
 		/* font-size: ${({ theme }) => theme.typo.size.heading3}; */
 		margin-left: ${({ theme }) => theme.spacing(2)};
+	}
+
+	& .active {
+		color: ${({ theme }) => theme.palette.yellowNassa};
 	}
 `

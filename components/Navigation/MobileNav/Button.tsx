@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import * as React from 'react'
 import styled from 'styled-components'
 
+import { MenuToggle } from 'app/shared/types'
+
 const Path = (props: any) => (
 	<motion.path
 		fill="transparent"
@@ -12,7 +14,7 @@ const Path = (props: any) => (
 	/>
 )
 
-export const MenuToggle = ({ toggle }: { toggle: () => void }) => (
+export const Button = ({ toggle }: MenuToggle) => (
 	<MenuCTA onClick={toggle}>
 		<svg width="23" height="23" viewBox="0 0 23 23">
 			<Path

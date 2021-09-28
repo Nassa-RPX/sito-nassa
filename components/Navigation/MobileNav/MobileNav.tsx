@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
-import { MenuToggle } from './Button'
+import { Button } from './Button'
 import { Navigation } from './List'
 import { backgroundVariant } from './variants'
 
@@ -23,8 +23,8 @@ export const MobileNav = () => {
 			ref={containerRef}
 		>
 			<Background variants={backgroundVariant} />
-			<Navigation />
-			<MenuToggle toggle={() => toggleOpen()} />
+			<Navigation toggle={() => toggleOpen()} />
+			<Button toggle={() => toggleOpen()} />
 		</Nav>
 	)
 }

@@ -6,13 +6,17 @@ import styled from 'styled-components'
 import { itemVariant } from './variants'
 
 import { Page } from 'app/data/pages'
+import { MenuToggle } from 'app/shared/types'
 
-export const MenuItem = ({ page }: { page: Page }) => {
+type ItemProps = MenuToggle & { page: Page }
+
+export const MenuItem = ({ toggle, page }: ItemProps) => {
 	return (
 		<PageItem
 			variants={itemVariant}
 			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.95 }}
+			onClick={toggle}
 		>
 			<Link href={page.url}>{page.name}</Link>
 		</PageItem>
