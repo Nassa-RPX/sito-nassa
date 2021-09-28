@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 import { Children } from 'app/shared/types'
@@ -9,14 +10,31 @@ export const Container = ({
 	margin,
 	children
 }: ContainerProps): JSX.Element => {
-	console.log('container margin', margin)
-	return <Base margin={margin}>{children}</Base>
+	const [windowHeight, setWindowHeight] = useState<number>(0)
+
+	useEffect(() => {
+		setWindowHeight(window.innerHeight)
+	}, [])
+
+	return (
+		<Base margin={margin} baseHeight={windowHeight}>
+			{children}
+		</Base>
+	)
 }
 
 type BaseVariants = {
-	margin?: number
+	margin: number
+	baseHeight: number
 }
 
 const Base = styled.div<BaseVariants>`
+	min-height: ${(props) => props.baseHeight - props.margin}px;
 	margin-top: ${(props) => props.margin}px;
+
+	${up('lg')} {
+		width: 90%;
+		margin: 0 auto;
+		margin-top: ${(props) => props.margin}px;
+	}
 `
