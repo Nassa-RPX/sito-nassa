@@ -22,18 +22,16 @@ export const Hero = (): JSX.Element => {
 		if (!content || !content.items[0]) return <ErrorView />
 
 		const introductionData = content?.items[0]
-		console.log('introduction', introductionData.fields.logoNassa.fields.file)
-
 		const imageFile = introductionData.fields.logoNassa.fields.file
 
-		const { width, height } = getImageInfo({
+		const { height } = getImageInfo({
 			file: imageFile
 		})
 
 		return (
 			<HeroBase height={height} direction={'row'}>
 				<Banner>
-					<Image file={imageFile} alt={'HeroBanner'} />
+					<Image file={imageFile} alt={'Benvenuti in Nassa'} />
 				</Banner>
 				<Data>
 					<Info>
@@ -87,6 +85,7 @@ const Banner = styled.div`
 const Data = styled.div`
 	flex: 1;
 	height: 100%;
+	margin-left: ${({ theme }) => theme.spacing(4)};
 
 	font-size: ${({ theme }) => theme.typo.size.heading3};
 `

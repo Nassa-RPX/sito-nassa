@@ -73,7 +73,7 @@ export interface INassaFields {
 	id: string
 
 	/** logo */
-	logo?: Asset | undefined
+	logo: Asset
 }
 
 /** Modello della nassa */

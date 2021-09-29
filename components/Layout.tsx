@@ -13,6 +13,7 @@ type BaseProps = {
 }
 
 export const Base = styled.div<BaseProps>`
+	width: 100%;
 	display: flex;
 	flex-direction: ${(props) => props.direction};
 
@@ -20,13 +21,13 @@ export const Base = styled.div<BaseProps>`
 		(props.centerX && props.direction === 'column') ||
 		(props.centerY && props.direction === 'row')
 			? 'center'
-			: 'inherit'};
+			: 'flex-start'};
 
 	justify-content: ${(props) =>
 		(props.centerY && props.direction === 'column') ||
 		(props.centerX && props.direction === 'row')
 			? 'center'
-			: 'inherit'};
+			: 'flex-start'};
 
 	${down('lg')} {
 		flex-direction: column;

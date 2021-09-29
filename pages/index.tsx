@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import { Hero } from './home/Hero'
+import { NassaList } from './home/NassaList'
 
 import { title } from 'app/data/info'
 
@@ -15,6 +16,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Hero />
+			<NassaList />
 		</Base>
 	)
 }
