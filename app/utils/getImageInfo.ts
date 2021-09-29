@@ -1,15 +1,9 @@
 import { defaults } from 'app/data/info'
+import { ContentfulImage } from 'app/shared/types'
 
 export type Arguments = {
-	file: {
-		url: string
-		details: {
-			image?: {
-				width: number
-				height: number
-			}
-		}
-	}
+	file: ContentfulImage
+	mobile?: boolean
 }
 
 export type ReturnType = {
@@ -18,11 +12,21 @@ export type ReturnType = {
 	height: number
 }
 
-export const getImageInfo = ({ file }: Arguments): ReturnType => {
+export const getImageInfo = ({
+	file,
+	mobile = false
+}: Arguments): ReturnType => {
 	const url = `https:${file.url}`
 
-	const width = file.details.image?.width || defaults.width
-	const height = file.details.image?.height || defaults.height
+	console.log('mobile', mobile)
+
+	let width = file.details.image?.width || defaults.width
+	let height = file.details.image?.height || defaults.height
+
+	if (mobile) {
+		width = width * defaults.mobileShift
+		height = height * defaults.mobileShift
+	}
 
 	return { url, width, height }
 }

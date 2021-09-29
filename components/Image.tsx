@@ -1,15 +1,19 @@
+import NextImage from 'next/image'
 import React from 'react'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import 'react-lazy-load-image-component/src/effects/blur.css'
+
+import { useMobile } from 'app/hooks/useMobile'
+import { ContentfulImage } from 'app/shared/types'
+import { getImageInfo } from 'app/utils/getImageInfo'
 
 export type ImageProps = {
+	file: ContentfulImage
 	alt: string
-	src: string
-	remote: boolean
 }
 
-export const Image: React.FC<ImageProps> = ({ alt, src, remote = false }) => {
-	const imageSrc = remote ? `http:${src}` : src
+export const Image: React.FC<ImageProps> = ({ file, alt }) => {
+	const { isMobile } = useMobile()
 
-	return <LazyLoadImage alt={alt} src={imageSrc} effect={'blur'} />
+	const { url, width, height } = getImageInfo({ file, mobile: isMobile() })
+
+	return <NextImage src={url} alt={alt} width={width} height={height} />
 }

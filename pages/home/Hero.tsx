@@ -1,16 +1,15 @@
-import Image from 'next/image'
 import React from 'react'
-import { down, up } from 'styled-breakpoints'
+import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 import { STATES } from 'app/data/constants'
 import { useContenful } from 'app/hooks/useContentful'
 import { IIntroductionFields } from 'app/shared/contentful'
-import { getImageInfo } from 'app/utils/getImageInfo'
 
-import { BaseVariants } from 'components/Container'
+import { Image } from 'components/Image'
 import { Base } from 'components/Layout'
 import { Loading } from 'components/Loading'
+import { getImageInfo } from 'app/utils/getImageInfo'
 
 export const Hero = (): JSX.Element => {
 	const { content, apiState, error } = useContenful<IIntroductionFields>({
@@ -25,14 +24,16 @@ export const Hero = (): JSX.Element => {
 		const introductionData = content?.items[0]
 		console.log('introduction', introductionData.fields.logoNassa.fields.file)
 
-		const { url, width, height } = getImageInfo({
-			file: introductionData.fields.logoNassa.fields.file
+		const imageFile = introductionData.fields.logoNassa.fields.file
+
+		const { width, height } = getImageInfo({
+			file: imageFile
 		})
 
 		return (
 			<HeroBase height={height} direction={'row'}>
 				<Banner>
-					<Image src={url} alt={'static'} width={width} height={height} />
+					<Image file={imageFile} alt={'HeroBanner'} />
 				</Banner>
 				<Data>
 					<Info>
