@@ -4,4 +4,9 @@ const withFonts = require('next-fonts')
 // 	reactStrictMode: true
 // }
 
-module.exports = withFonts()
+module.exports = {
+	images: {
+		domains: ['images.ctfassets.net']
+	},
+	...withFonts()
+}

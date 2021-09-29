@@ -21,7 +21,7 @@ const theme: DefaultTheme = {
 		size: {
 			heading1: '48px',
 			heading2: '30px',
-			heading3: '24px',
+			heading3: '22px',
 			paragraph: '18px',
 			detail: '16px'
 		}

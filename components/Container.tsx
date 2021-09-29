@@ -23,18 +23,19 @@ export const Container = ({
 	)
 }
 
-type BaseVariants = {
+export type BaseVariants = {
 	margin: number
 	baseHeight: number
 }
 
 const Base = styled.div<BaseVariants>`
 	min-height: ${(props) => props.baseHeight - props.margin}px;
+	width: 90%;
+	margin: 0 auto;
 	margin-top: ${(props) => props.margin}px;
 
 	${up('lg')} {
-		width: 90%;
-		margin: 0 auto;
+		width: 70%;
 		margin-top: ${(props) => props.margin}px;
 	}
 `

@@ -66,7 +66,7 @@ const TigullioBox = styled.img`
 
 	${up('md')} {
 		width: 110%;
-		transform: rotate(-5deg);
+		transform: rotate(-2deg);
 	}
 `
 

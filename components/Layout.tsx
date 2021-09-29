@@ -1,3 +1,4 @@
+import { down } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 export const VerticalMain = styled.main`
@@ -10,6 +11,7 @@ type BaseProps = {
 	centerY?: boolean
 	centerX?: boolean
 }
+
 export const Base = styled.div<BaseProps>`
 	display: flex;
 	flex-direction: ${(props) => props.direction};
@@ -25,4 +27,8 @@ export const Base = styled.div<BaseProps>`
 		(props.centerX && props.direction === 'row')
 			? 'center'
 			: 'inherit'};
+
+	${down('lg')} {
+		flex-direction: column;
+	}
 `
