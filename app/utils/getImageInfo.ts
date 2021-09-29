@@ -18,8 +18,6 @@ export const getImageInfo = ({
 }: Arguments): ReturnType => {
 	const url = `https:${file.url}`
 
-	console.log('mobile', mobile)
-
 	let width = file.details.image?.width || defaults.width
 	let height = file.details.image?.height || defaults.height
 

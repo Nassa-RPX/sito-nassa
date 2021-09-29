@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import { STATES } from 'app/data/constants'
 import { useContenful } from 'app/hooks/useContentful'
 import { IIntroductionFields } from 'app/shared/contentful'
+import { getImageInfo } from 'app/utils/getImageInfo'
 
 import { Image } from 'components/Image'
 import { Base } from 'components/Layout'
 import { Loading } from 'components/Loading'
-import { getImageInfo } from 'app/utils/getImageInfo'
 
 export const Hero = (): JSX.Element => {
 	const { content, apiState, error } = useContenful<IIntroductionFields>({
@@ -104,6 +104,7 @@ const Title = styled.h1`
 `
 
 const Sub = styled.h2`
+	font-weight: bold;
 	margin-top: ${({ theme }) => theme.spacing(1)};
 	margin-bottom: ${({ theme }) => theme.spacing(0.5)};
 `
