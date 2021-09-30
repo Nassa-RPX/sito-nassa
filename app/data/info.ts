@@ -6,7 +6,7 @@ export type Defaults = {
 	mobileShift: number
 }
 
-export const defaults = {
+export const defaults: Defaults = {
 	width: 100,
 	height: 100,
 	mobileShift: 0.8
