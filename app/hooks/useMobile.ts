@@ -9,7 +9,6 @@ type ReturnType = {
 }
 
 const getMobileDetect = (userAgent: string): ReturnType => {
-	console.log('userAgent', userAgent)
 	const isAndroid = (): boolean => Boolean(userAgent.match(/Android/i))
 	const isIos = (): boolean => Boolean(userAgent.match(/iPhone|iPad|iPod/i))
 	const isOpera = (): boolean => Boolean(userAgent.match(/Opera Mini/i))
@@ -29,7 +28,6 @@ const getMobileDetect = (userAgent: string): ReturnType => {
 }
 
 export const useMobile = (): ReturnType => {
-	console.log('hello')
 	const userAgent =
 		typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent
 	return getMobileDetect(userAgent)

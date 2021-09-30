@@ -4,6 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Container } from './Container'
 import { Navbar } from './Navigation/Navbar'
 
+import { useMobile } from 'app/hooks/useMobile'
 import { Children } from 'app/shared/types'
 import theme from 'app/theme'
 import fontsFaces from 'app/theme/fontsFaces'
@@ -21,6 +22,7 @@ export const GlobalStyle = createGlobalStyle`
 	   flex-direction: column;
 	   font-family: ${({ theme }) => theme.typo.family.main};
 	   font-size: 18px;
+	   overflow-x: hidden;
    }
 
 `
@@ -28,17 +30,20 @@ export const GlobalStyle = createGlobalStyle`
 export const Root = ({ children }: Children) => {
 	const ref = useRef<HTMLDivElement>(null)
 
+	const { isMobile } = useMobile()
+
 	const [navHeight, setNavHeight] = useState<number>(0)
 
 	useEffect(() => {
 		const getHeight = () => {
 			const { current } = ref
 			if (!current || !current.clientHeight) return
-			setNavHeight(current.clientHeight - current.clientHeight * 0.4)
+			const shift = isMobile() ? 0.2 : 0.4
+			setNavHeight(current.clientHeight - current.clientHeight * shift)
 		}
 
 		getHeight()
-	}, [])
+	}, [isMobile])
 
 	return (
 		<ThemeProvider theme={theme}>

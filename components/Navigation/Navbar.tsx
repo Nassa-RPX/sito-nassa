@@ -13,10 +13,13 @@ export const Navbar = React.forwardRef<HTMLDivElement>((props, ref) => {
 
 	return (
 		<Base>
-			<Background ref={ref}>
-				{/* <TigullioBox src={'../assets/map2.svg'} /> */}
+			{/* <Background ref={ref}>
 				<TigullioBox src={'../assets/tigullio.svg'} />
-			</Background>
+			</Background> */}
+
+			<BackgroundVirgi ref={ref}>
+				<TigullioVirgi src={'../assets/map2.svg'} />
+			</BackgroundVirgi>
 			<Nav>
 				<MobileNav />
 
@@ -67,6 +70,25 @@ const TigullioBox = styled.img`
 	${up('md')} {
 		width: 110%;
 		transform: rotate(-2deg);
+	}
+`
+
+const BackgroundVirgi = styled.div`
+	position: absolute;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	${up('lg')} {
+		top: -200px;
+	}
+`
+
+const TigullioVirgi = styled.img`
+	width: 110%;
+
+	${up('lg')} {
+		height: 800px;
+		transform: rotate(-4deg);
 	}
 `
 

@@ -6,6 +6,8 @@ type Arguments = {
 
 type ReturnType = {
 	sliderConstraints: number
+	childWidth: number
+	totalWidth: number
 }
 
 export const useGetSliderConstraints = ({ ref }: Arguments): ReturnType => {
@@ -31,7 +33,7 @@ export const useGetSliderConstraints = ({ ref }: Arguments): ReturnType => {
 			const nodes = ref.current.childNodes as NodeListOf<HTMLDivElement>
 			const node = nodes[0]
 
-			setSliderChildWidth(node.clientWidth / 3)
+			setSliderChildWidth(node.clientWidth)
 		}
 
 		calcSliderChildrenWidth()
@@ -46,12 +48,18 @@ export const useGetSliderConstraints = ({ ref }: Arguments): ReturnType => {
 		window.addEventListener('resize', calcSliderWidth)
 
 		const calcSliderConstraints = () => {
-			setSliderConstraints(sliderChildrenWidth - sliderWidth + sliderChildWidth)
+			setSliderConstraints(
+				sliderChildrenWidth - sliderWidth + sliderChildWidth / 3
+			)
 		}
 
 		calcSliderConstraints()
 		window.addEventListener('resize', calcSliderConstraints)
 	}, [ref, sliderChildrenWidth, sliderWidth, sliderChildWidth])
 
-	return { sliderConstraints }
+	return {
+		sliderConstraints,
+		childWidth: sliderChildWidth,
+		totalWidth: sliderChildrenWidth
+	}
 }

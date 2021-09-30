@@ -11,6 +11,7 @@ export const Container = ({
 	children
 }: ContainerProps): JSX.Element => {
 	const [windowHeight, setWindowHeight] = useState<number>(0)
+	console.log('margin', margin)
 
 	useEffect(() => {
 		setWindowHeight(window.innerHeight)
