@@ -75,6 +75,8 @@ const Banner = styled.div`
 	display: flex;
 	justify-content: center;
 
+	transform: translateX(-5%);
+
 	margin-bottom: ${({ theme }) => theme.spacing(2)};
 
 	${up('lg')} {
@@ -85,9 +87,11 @@ const Banner = styled.div`
 const Data = styled.div`
 	flex: 1;
 	height: 100%;
-	margin-left: ${({ theme }) => theme.spacing(4)};
-
 	font-size: ${({ theme }) => theme.typo.size.heading3};
+
+	${up('lg')} {
+		margin-left: ${({ theme }) => theme.spacing(4)};
+	}
 `
 
 const Info = styled.div`
