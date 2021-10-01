@@ -9,7 +9,7 @@ export const backgroundVariant = {
 	}),
 	closed: {
 		x: 0,
-		clipPath: 'circle(0px at 98% 40px)',
+		clipPath: 'circle(0px at 89% 40px)',
 		transition: {
 			delay: 0.5,
 			type: 'spring',
