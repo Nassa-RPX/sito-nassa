@@ -42,6 +42,7 @@ export const Button = ({ toggle }: MenuToggle) => (
 )
 
 const MenuCTA = styled.button`
+	pointer-events: all;
 	outline: none;
 	border: none;
 	cursor: pointer;

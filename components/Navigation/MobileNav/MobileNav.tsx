@@ -40,6 +40,7 @@ export const MobileNav = () => {
 }
 
 const Nav = styled(motion.nav)`
+	pointer-events: none;
 	position: fixed;
 	top: 0;
 	right: 0;
