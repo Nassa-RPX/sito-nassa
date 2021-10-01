@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { SliderContainer } from './SliderContainer'
 
 import { STATES } from 'app/data/constants'
-import { useContenful } from 'app/hooks/useContentful'
+import { useContentful } from 'app/hooks/useContentful'
 import { INassaFields } from 'app/shared/contentful'
 import { ContentfulImage } from 'app/shared/types'
 
@@ -18,7 +18,7 @@ import { Loading } from 'components/Loading'
 export type ContentData = Array<Omit<INassaFields, 'logo'>>
 
 export const NassaSlide = (): JSX.Element => {
-	const { content, apiState, error } = useContenful<INassaFields>({
+	const { content, apiState, error } = useContentful<INassaFields>({
 		type: 'nassa'
 	})
 

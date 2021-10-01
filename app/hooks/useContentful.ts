@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { CONTENT_TYPE } from './../shared/contentful.d'
 
-import { client } from 'app/client'
+import { client } from 'pages/_app'
 
 export type API_STATE = 'idle' | 'loading' | 'success' | 'error'
 
@@ -18,7 +18,7 @@ export type ReturnType<T> = {
 	error?: string
 }
 
-export const useContenful = <T>({
+export const useContentful = <T>({
 	type,
 	fire = true
 }: Arguments): ReturnType<T> => {

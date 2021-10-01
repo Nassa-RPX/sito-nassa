@@ -11,7 +11,7 @@ module.exports = function () {
 	})
 
 	return contentfulClient
-		.getSpace(process.env.SPACE)
+		.getSpace(process.env.NEXT_PUBLIC_SPACE)
 		.then((space) => space.getEnvironment(process.env.ENVIRONMENT))
 		.catch((e) => console.error('error:', e))
 }

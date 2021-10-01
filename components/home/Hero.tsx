@@ -3,7 +3,7 @@ import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 import { STATES } from 'app/data/constants'
-import { useContenful } from 'app/hooks/useContentful'
+import { useContentful } from 'app/hooks/useContentful'
 import { IIntroductionFields } from 'app/shared/contentful'
 import { getImageInfo } from 'app/utils/getImageInfo'
 
@@ -12,7 +12,7 @@ import { Base } from 'components/Layout'
 import { Loading } from 'components/Loading'
 
 export const Hero = (): JSX.Element => {
-	const { content, apiState, error } = useContenful<IIntroductionFields>({
+	const { content, apiState, error } = useContentful<IIntroductionFields>({
 		type: 'introduction'
 	})
 
