@@ -74,6 +74,7 @@ const TigullioBox = styled.img`
 `
 
 const BackgroundVirgi = styled.div`
+	pointer-events: none;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -85,6 +86,7 @@ const BackgroundVirgi = styled.div`
 
 const TigullioVirgi = styled.img`
 	width: 110%;
+	pointer-events: none;
 
 	${up('lg')} {
 		height: 800px;

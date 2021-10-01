@@ -64,9 +64,9 @@ type HeroBaseProps = {
 }
 
 const HeroBase = styled(Base)<HeroBaseProps>`
-	${up('lg')} {
+	/* ${up('lg')} {
 		height: ${(props) => props.height}px;
-	}
+	} */
 `
 
 const Banner = styled.div`
@@ -81,6 +81,7 @@ const Banner = styled.div`
 
 	${up('lg')} {
 		margin-bottom: none;
+		transform: none;
 	}
 `
 

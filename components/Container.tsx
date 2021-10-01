@@ -31,6 +31,7 @@ export type BaseVariants = {
 
 const Base = styled.div<BaseVariants>`
 	min-height: ${(props) => props.baseHeight - props.margin}px;
+	z-index: 2;
 	width: 90%;
 	margin: 0 auto;
 	margin-top: ${(props) => props.margin}px;

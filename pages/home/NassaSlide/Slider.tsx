@@ -28,7 +28,7 @@ export const Slider = ({
 	} = useGetSliderConstraints({ ref })
 
 	const checkStart = (): boolean => {
-		return x.get() === 0
+		return x.get() >= 0
 	}
 
 	const checkEnd = (): boolean => {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
+import { Icons } from 'components/Icons'
+
 type Props = {
 	move: (direction: 'prev' | 'next') => void
 	checkStart: () => boolean
@@ -32,9 +34,8 @@ export const Controls = ({
 					move('prev')
 					setIsMoved(isMoved + 1)
 				}}
-				disabled={position.start}
 			>
-				-
+				<Icons.ControlPrev size={32} />
 			</Control>
 
 			<Control
@@ -43,31 +44,29 @@ export const Controls = ({
 					move('next')
 					setIsMoved(isMoved + 1)
 				}}
-				disabled={position.end}
 			>
-				+
+				<Icons.ControlNext size={32} />
 			</Control>
 		</>
 	)
 }
 
-const Control = styled.span<{ type: 'prev' | 'next'; disabled: boolean }>`
-	display: ${(props) => (props.disabled ? 'none' : 'flex')};
+const Control = styled.span<{ type: 'prev' | 'next' }>`
+	display: flex;
 	position: absolute;
-
-	height: 25px;
-	width: 25px;
 
 	justify-content: center;
 	align-items: center;
 
-	background: white;
 	border-radius: 100%;
 
 	cursor: pointer;
+	color: ${({ theme }) => theme.palette.whiteNassa};
 
-	left: ${(props) => (props.type === 'prev' ? '0' : 'inherit')};
-	right: ${(props) => (props.type === 'next' ? '0' : 'inherit')};
+	left: ${(props) =>
+		props.type === 'prev' ? props.theme.spacing(1) : 'inherit'};
+	right: ${(props) =>
+		props.type === 'next' ? props.theme.spacing(1) : 'inherit'};
 
 	top: 50%;
 	transform: translateY(-50%);
