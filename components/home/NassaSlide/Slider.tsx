@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Controls } from './Controls'
 
 import { useGetSliderConstraints } from 'app/hooks/useGetSliderConstraints'
+import { useMobile } from 'app/hooks/useMobile'
 import { Children } from 'app/shared/types'
 
 // ! Fix slider reset on final slide
@@ -21,6 +22,9 @@ export const Slider = ({
 }: Props) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const x = useMotionValue<number>(0)
+
+	const { isMobile } = useMobile()
+
 	const {
 		sliderConstraints,
 		childWidth,
@@ -32,7 +36,9 @@ export const Slider = ({
 	}
 
 	const checkEnd = (): boolean => {
-		return x.get() <= Number(-totalWidth + childWidth * 3)
+		const elementsShift = isMobile() ? 1 : 3
+
+		return x.get() <= Number(-totalWidth + childWidth * elementsShift)
 	}
 
 	const manualMovement = (direction: 'prev' | 'next') => {
