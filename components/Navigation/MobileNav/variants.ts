@@ -8,6 +8,7 @@ export const backgroundVariant = {
 		}
 	}),
 	closed: {
+		x: 0,
 		clipPath: 'circle(0px at 98% 40px)',
 		transition: {
 			delay: 0.5,
@@ -20,10 +21,15 @@ export const backgroundVariant = {
 
 export const listVariant = {
 	open: {
+		zIndex: 6,
 		transition: { staggerChildren: 0.07, delayChildren: 0.2 }
 	},
 	closed: {
-		transition: { staggerChildren: 0.05, staggerDirection: -1 }
+		transition: {
+			staggerChildren: 0.05,
+			staggerDirection: -1
+		},
+		transitionEnd: { zIndex: 0 }
 	}
 }
 

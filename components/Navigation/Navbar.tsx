@@ -45,33 +45,33 @@ const Base = styled.div`
 	color: white;
 `
 
-const Background = styled.div`
-	position: absolute;
-	left: -380px;
-	top: -10vh;
-	right: 0;
+// const Background = styled.div`
+// 	position: absolute;
+// 	left: -380px;
+// 	top: -10vh;
+// 	right: 0;
 
-	overflow-x: hidden;
-	overflow-y: hidden;
+// 	overflow-x: hidden;
+// 	overflow-y: hidden;
 
-	${up('md')} {
-		top: -60px;
-		left: -40px;
-	}
+// 	${up('md')} {
+// 		top: -60px;
+// 		left: -40px;
+// 	}
 
-	${up('lg')} {
-		top: -20vh;
-	}
-`
+// 	${up('lg')} {
+// 		top: -20vh;
+// 	}
+// `
 
-const TigullioBox = styled.img`
-	width: 120%;
+// const TigullioBox = styled.img`
+// 	width: 120%;
 
-	${up('md')} {
-		width: 110%;
-		transform: rotate(-2deg);
-	}
-`
+// 	${up('md')} {
+// 		width: 110%;
+// 		transform: rotate(-2deg);
+// 	}
+// `
 
 const BackgroundVirgi = styled.div`
 	pointer-events: none;
@@ -98,7 +98,6 @@ const Nav = styled.section`
 	position: absolute;
 	right: ${({ theme }) => theme.spacing(2)};
 	top: ${({ theme }) => theme.spacing(2)};
-	z-index: 2;
 `
 
 const Pages = styled.div`

@@ -70,6 +70,7 @@ const HeroBase = styled(Base)<HeroBaseProps>`
 `
 
 const Banner = styled.div`
+	z-index: -2;
 	flex: 1;
 	position: relative;
 	display: flex;

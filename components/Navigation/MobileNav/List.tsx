@@ -8,15 +8,20 @@ import { listVariant } from './variants'
 import { pages } from 'app/data/pages'
 import { MenuToggle } from 'app/shared/types'
 
-export const Navigation = ({ toggle }: MenuToggle) => (
-	<PagesList variants={listVariant}>
+type Props = {
+	isOpen: boolean
+} & MenuToggle
+
+export const Navigation = ({ isOpen, toggle }: Props) => (
+	<PagesList isOpen={isOpen} variants={listVariant}>
 		{pages.map((page, idx) => (
 			<MenuItem page={page} key={idx} toggle={toggle} />
 		))}
 	</PagesList>
 )
 
-const PagesList = styled(motion.ul)`
+const PagesList = styled(motion.ul)<{ isOpen: boolean }>`
+	pointer-events: ${(props) => (props.isOpen ? 'all' : 'none')};
 	padding: 25px;
 	position: absolute;
 	top: 50%;

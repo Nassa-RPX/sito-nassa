@@ -11,8 +11,6 @@ export const Container = ({
 	children
 }: ContainerProps): JSX.Element => {
 	const [windowHeight, setWindowHeight] = useState<number>(0)
-	console.log('margin', margin)
-
 	useEffect(() => {
 		setWindowHeight(window.innerHeight)
 	}, [])
@@ -31,7 +29,6 @@ export type BaseVariants = {
 
 const Base = styled.div<BaseVariants>`
 	min-height: ${(props) => props.baseHeight - props.margin}px;
-	z-index: 2;
 	width: 90%;
 	margin: 0 auto;
 	margin-top: ${(props) => props.margin}px;
