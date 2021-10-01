@@ -1,6 +1,6 @@
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
@@ -79,6 +79,8 @@ const BackgroundVirgi = styled.div`
 	left: 0;
 	right: 0;
 	overflow: hidden;
+	top: -30px;
+
 	${up('lg')} {
 		top: -200px;
 	}
@@ -87,6 +89,8 @@ const BackgroundVirgi = styled.div`
 const TigullioVirgi = styled.img`
 	width: 110%;
 	pointer-events: none;
+
+	transform: rotate(-4deg);
 
 	${up('lg')} {
 		height: 800px;
