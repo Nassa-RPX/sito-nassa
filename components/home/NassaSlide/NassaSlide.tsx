@@ -1,6 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { ST } from 'next/dist/next-server/lib/utils'
-import { wrap } from 'popmotion'
 import React, { useCallback, useEffect, useState } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
@@ -12,7 +9,6 @@ import { useContentful } from 'app/hooks/useContentful'
 import { INassaFields } from 'app/shared/contentful'
 import { ContentfulImage } from 'app/shared/types'
 
-import { Image } from 'components/Image'
 import { Loading } from 'components/Loading'
 
 export type ContentData = Array<Omit<INassaFields, 'logo'>>
