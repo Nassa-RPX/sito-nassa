@@ -75,6 +75,7 @@ const Base = styled.div`
 	width: 100%;
 	background: ${({ theme }) => theme.palette.blueNassa};
 	overflow-x: hidden;
+	border-radius: ${({ theme }) => theme.spacing(1)};
 
 	justify-content: center;
 	margin: ${({ theme }) => theme.spacing(2, 0)};

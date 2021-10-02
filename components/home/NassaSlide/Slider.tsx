@@ -8,8 +8,6 @@ import { useGetSliderConstraints } from 'app/hooks/useGetSliderConstraints'
 import { useMobile } from 'app/hooks/useMobile'
 import { Children } from 'app/shared/types'
 
-// ! Fix slider reset on final slide
-
 type Props = {
 	bounceStiffness?: number
 	bounceDamping?: number
@@ -17,8 +15,8 @@ type Props = {
 
 export const Slider = ({
 	children,
-	bounceStiffness = 100, // Affects the stiffness of the bounce spring. Higher values will create more sudden movement.
-	bounceDamping = 10 // affects the damping of the bounce spring. If set to 0, spring will oscillate indefinitely.
+	bounceStiffness = 100,
+	bounceDamping = 10
 }: Props) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const x = useMotionValue<number>(0)
