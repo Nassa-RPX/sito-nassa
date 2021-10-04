@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -77,7 +78,9 @@ const Milestones = (): JSX.Element => {
 				<NassaList>
 					{nassaList &&
 						nassaList.map((nassa) => (
-							<NassaEl key={nassa.id}>{nassa.name}</NassaEl>
+							<NassaEl key={nassa.id}>
+								<Link href={`/milestones/${nassa.id}`}>{nassa.name}</Link>
+							</NassaEl>
 						))}
 				</NassaList>
 			</MilestoneHeader>
