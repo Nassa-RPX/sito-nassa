@@ -29,9 +29,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Root = ({ children }: Children) => {
 	const ref = useRef<HTMLDivElement>(null)
-
 	const { isMobile } = useMobile()
-
 	const [navHeight, setNavHeight] = useState<number>(0)
 
 	useEffect(() => {
