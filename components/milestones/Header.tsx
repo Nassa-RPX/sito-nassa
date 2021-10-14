@@ -1,16 +1,15 @@
 import Link from 'next/link'
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
-import { useGetMilestones } from 'app/hooks/useGetMilestones'
-import { NassaObj } from 'app/shared/types'
 import { useMilestoneStore } from 'app/store/useMilestoneStore'
-import { getUniques } from 'app/utils/getUniques'
 
-export const Header = (): JSX.Element => {
+type Props = {
+	current?: string
+}
+
+export const Header = ({ current = 'nassa-onu' }: Props): JSX.Element => {
 	const { list } = useMilestoneStore()
-
-	useGetMilestones()
 
 	return (
 		<Base>
@@ -21,7 +20,9 @@ export const Header = (): JSX.Element => {
 				<NassaList>
 					{list.map((el, idx) => (
 						<NassaEl key={el.id}>
-							<Link href={`/milestones/${el.id}`}>{el.name}</Link>
+							<Link href={`/milestones/${el.id}`} passHref>
+								<a className={el.id === current ? 'active' : ''}>{el.name}</a>
+							</Link>
 						</NassaEl>
 					))}
 				</NassaList>
@@ -30,7 +31,9 @@ export const Header = (): JSX.Element => {
 	)
 }
 
-const Base = styled.section``
+const Base = styled.section`
+	z-index: 3;
+`
 
 const MilestoneHeader = styled.div`
 	display: flex;
@@ -50,5 +53,10 @@ const NassaList = styled.ul`
 const NassaEl = styled.li`
 	font-size: ${({ theme }) => theme.typo.size.heading3};
 	color: ${({ theme }) => theme.palette.grayNassa};
-	margin-top: ${({ theme }) => theme.spacing(0.5)}; ;
+	margin-top: ${({ theme }) => theme.spacing(0.5)};
+
+	& .active {
+		font-weight: bold;
+		color: ${({ theme }) => theme.palette.yellowNassa};
+	}
 `

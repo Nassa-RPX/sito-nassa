@@ -1,3 +1,4 @@
+import { EntryCollection } from 'contentful'
 import React from 'react'
 
 import { IMilestonesFields } from './contentful'
@@ -15,6 +16,8 @@ export type ContentfulImage = {
 		}
 	}
 }
+
+export type MilestonesCollection = EntryCollection<IMilestonesFields>
 
 export type MilestoneNassa = Record<
 	string,

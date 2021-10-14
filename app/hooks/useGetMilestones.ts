@@ -1,70 +1,47 @@
-import { useCallback, useEffect } from 'react'
+import { EntryCollection } from 'contentful'
+import { useEffect, useState } from 'react'
 
+import { useApiStore } from './../store/useApiStore'
 import { API_STATE, useContentful } from './useContentful'
 
+import { mapMilestones, mapNassaList } from 'app/lib/milestones'
 import { IMilestonesFields } from 'app/shared/contentful'
-import { MilestoneNassa, NassaObj } from 'app/shared/types'
+import {
+	MilestoneNassa,
+	MilestonesCollection,
+	NassaObj
+} from 'app/shared/types'
 import { useMilestoneStore } from 'app/store/useMilestoneStore'
-import { getUniques } from 'app/utils/getUniques'
 
-export const useGetMilestones = (): { apiState: API_STATE } => {
+type ReturnType = {
+	apiState: API_STATE
+	milestones?: MilestonesCollection
+	map?: MilestoneNassa
+	list?: NassaObj[]
+}
+
+export const useGetMilestones = (): ReturnType => {
+	const apiStore = useApiStore()
 	const { content, apiState } = useContentful<IMilestonesFields>({
 		type: 'milestones'
 	})
 
-	const { setMap, setMilestones, milestones, setList } = useMilestoneStore()
-
-	const mapMilestones = useCallback(() => {
-		if (!content) return
-
-		const map: MilestoneNassa = {}
-
-		content.items
-			.map((milestone) => {
-				return {
-					nassa: milestone.fields.nassa[0].fields.id,
-					title: milestone.fields.title,
-					description: milestone.fields.description,
-					date: milestone.fields.date
-				}
-			})
-			.forEach((mapped) => {
-				const toAdd = {
-					title: mapped.title,
-					description: mapped.description,
-					date: mapped.date
-				}
-
-				if (map[mapped.nassa]) map[mapped.nassa].push(toAdd)
-				else map[mapped.nassa] = [toAdd]
-			})
-
-		setMap(map)
-	}, [content])
+	const milestoneStore = useMilestoneStore()
 
 	useEffect(() => {
-		content && setMilestones(content)
-	}, [content])
+		apiStore.setApiState('milestones', apiState)
+	}, [apiState])
 
 	useEffect(() => {
-		content && mapMilestones()
-	}, [content, mapMilestones])
+		content && milestoneStore.setMilestones(content)
+		content && milestoneStore.setMap(mapMilestones(content))
+		content && milestoneStore.setList(mapNassaList(content))
+	}, [content])
 
-	const mapNassaList = () => {
-		if (!milestones) return
-
-		const mapNassa: Array<NassaObj> = milestones.items.map((milestone) => {
-			return {
-				id: milestone.fields.nassa[0].fields.id,
-				name: milestone.fields.nassa[0].fields.name
-			}
-		})
-		setList(getUniques<NassaObj>(mapNassa, 'id'))
+	return {
+		apiState: apiStore.apiState,
+		milestones: milestoneStore.milestones,
+		map: milestoneStore.map,
+		list: milestoneStore.list
 	}
-
-	useEffect(() => {
-		milestones && mapNassaList()
-	}, [milestones])
-
-	return { apiState }
 }

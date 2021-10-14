@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
+import { Error } from './Error'
+import { Loading } from './Loading'
+
+import { STATES } from 'app/data/constants'
 import { Children } from 'app/shared/types'
+import { useApiStore } from 'app/store/useApiStore'
+import {
+	isApiError,
+	isApiLoading,
+	isApiSuccessOrIdle
+} from 'app/utils/isApiState'
 
 type ContainerProps = { margin: number } & Children
 
@@ -15,8 +25,12 @@ export const Container = ({
 		setWindowHeight(window.innerHeight)
 	}, [])
 
+	const { apiState } = useApiStore()
+
 	return (
 		<Base margin={margin} baseHeight={windowHeight}>
+			{isApiLoading(apiState) && <Loading />}
+			{isApiError(apiState) && <Error />}
 			{children}
 		</Base>
 	)
