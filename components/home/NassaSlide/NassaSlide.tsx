@@ -4,37 +4,35 @@ import styled from 'styled-components'
 
 import { SliderContainer } from './SliderContainer'
 
-import { STATES } from 'app/data/constants'
-import { useContentful } from 'app/hooks/useContentful'
 import { INassaFields } from 'app/shared/contentful'
-import { ContentfulImage } from 'app/shared/types'
-
-import { Loading } from 'components/Loading'
+import { ContentfulImage, NassaCollection } from 'app/shared/types'
 
 export type ContentData = Array<Omit<INassaFields, 'logo'>>
 
-export const NassaSlide = (): JSX.Element => {
-	const { content, apiState, error } = useContentful<INassaFields>({
-		type: 'nassa'
-	})
+type Props = {
+	nassaInfo?: NassaCollection
+}
 
+export const NassaSlide = ({ nassaInfo }: Props): JSX.Element => {
 	const [images, setImages] = useState<Array<ContentfulImage>>([])
 	const [data, setData] = useState<ContentData>([])
 	const [ready, setReady] = useState<boolean>(false)
 
 	const mapImages = useCallback(() => {
-		if (!content) return
-		const contentImages: Array<ContentfulImage> = content.items.map((item) => {
-			return item.fields.logo.fields.file
-		})
+		if (!nassaInfo) return
+		const contentImages: Array<ContentfulImage> = nassaInfo.items.map(
+			(item) => {
+				return item.fields.logo.fields.file
+			}
+		)
 
 		setImages(contentImages)
-	}, [content])
+	}, [nassaInfo])
 
 	const mapData = useCallback(() => {
-		if (!content) return
+		if (!nassaInfo) return
 
-		const contentData: ContentData = content.items.map((item) => {
+		const contentData: ContentData = nassaInfo.items.map((item) => {
 			return {
 				id: item.fields.id,
 				name: item.fields.name
@@ -42,27 +40,22 @@ export const NassaSlide = (): JSX.Element => {
 		})
 
 		setData(contentData)
-	}, [content])
+	}, [nassaInfo])
 
 	useEffect(() => {
-		if (apiState !== STATES.SUCCESS || !content) return
+		if (!nassaInfo) return
 
 		mapImages()
 		mapData()
 
 		setReady(true)
-	}, [content, apiState, mapImages, mapData])
+	}, [nassaInfo, mapImages, mapData])
 
 	/* ----------------------------- SUB COMPONENTS ----------------------------- */
 
 	/* ----------------------------- MAIN RETURN ----------------------------- */
 
-	return (
-		<Base>
-			{apiState === STATES.LOADING && <Loading />}
-			{ready && <SliderContainer images={images} data={data} />}
-		</Base>
-	)
+	return <Base>{ready && <SliderContainer images={images} data={data} />}</Base>
 }
 
 const Base = styled.div`

@@ -2,26 +2,24 @@ import React from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
-import { STATES } from 'app/data/constants'
-import { useContentful } from 'app/hooks/useContentful'
-import { IIntroductionFields } from 'app/shared/contentful'
+import { IntroductionCollection } from 'app/shared/types'
 import { getImageInfo } from 'app/utils/getImageInfo'
 
 import { Image } from 'components/Image'
 import { Base } from 'components/Layout'
 import { Loading } from 'components/Loading'
 
-export const Hero = (): JSX.Element => {
-	const { content, apiState, error } = useContentful<IIntroductionFields>({
-		type: 'introduction'
-	})
+type Props = {
+	introductionInfo?: IntroductionCollection
+}
 
+export const Hero = ({ introductionInfo }: Props): JSX.Element => {
 	/* ----------------------------- SUB COMPONENTS ----------------------------- */
 
 	const SuccessView = () => {
-		if (!content || !content.items[0]) return <ErrorView />
+		if (!introductionInfo || !introductionInfo.items[0]) return <Loading />
 
-		const introductionData = content?.items[0]
+		const introductionData = introductionInfo?.items[0]
 		const imageFile = introductionData.fields.logoNassa.fields.file
 
 		const { height } = getImageInfo({
@@ -44,19 +42,9 @@ export const Hero = (): JSX.Element => {
 		)
 	}
 
-	const ErrorView = () => {
-		return <span>Error, {error}</span>
-	}
-
 	/* ----------------------------- MAIN RETURN ----------------------------- */
 
-	return (
-		<>
-			{apiState === STATES.LOADING && <Loading />}
-			{apiState === STATES.ERROR && <ErrorView />}
-			{apiState === STATES.SUCCESS && <SuccessView />}
-		</>
-	)
+	return <>{<SuccessView />}</>
 }
 
 type HeroBaseProps = {

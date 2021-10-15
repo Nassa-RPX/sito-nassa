@@ -6,10 +6,15 @@ import styled from 'styled-components'
 import { NassaSlide } from './NassaSlide/NassaSlide'
 
 import { HomeData } from 'app/data/pages'
+import { NassaCollection } from 'app/shared/types'
 
 import { Base } from 'components/Layout'
 
-export const NassaList = (): JSX.Element => {
+type Props = {
+	nassaInfo?: NassaCollection
+}
+
+export const NassaList = ({ nassaInfo }: Props): JSX.Element => {
 	return (
 		<Base direction={'column'}>
 			<ListHeader>
@@ -26,7 +31,7 @@ export const NassaList = (): JSX.Element => {
 				</ListAction>
 			</ListHeader>
 
-			<NassaSlide />
+			<NassaSlide nassaInfo={nassaInfo} />
 		</Base>
 	)
 }

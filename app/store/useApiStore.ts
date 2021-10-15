@@ -9,6 +9,8 @@ type StoreType = {
 	currentApis?: Map<CONTENT_TYPE, API_STATE>
 	setCurrentApis: (type: CONTENT_TYPE, state: API_STATE) => void
 	setApiState: (type: CONTENT_TYPE, state: API_STATE) => void
+
+	clearState: () => void
 }
 
 export const useApiStore = create<StoreType>((set, get) => ({
@@ -26,26 +28,22 @@ export const useApiStore = create<StoreType>((set, get) => ({
 
 	setApiState: (type: CONTENT_TYPE, apiState: API_STATE) => {
 		get().setCurrentApis(type, apiState)
-
-		const current = get().currentApis
-		if (!current) {
-			set(() => ({ apiState: STATES.IDLE }))
-			return
-		}
-
-		if (current.size === 0) {
-			set(() => ({ apiState: STATES.IDLE }))
-			return
-		}
-
 		let res: API_STATE = STATES.IDLE
 
-		current.forEach((value) => {
-			if (value === STATES.ERROR) res = STATES.ERROR
-			if (value === STATES.LOADING && res !== STATES.ERROR) res = STATES.LOADING
-			if (value === STATES.SUCCESS && res === STATES.IDLE) res = STATES.SUCCESS
-		})
+		const current = get().currentApis
+
+		if (current && current.size > 0) {
+			current.forEach((value) => {
+				if (value === STATES.ERROR) res = STATES.ERROR
+				if (value === STATES.LOADING && res !== STATES.ERROR)
+					res = STATES.LOADING
+				if (value === STATES.SUCCESS && res === STATES.IDLE)
+					res = STATES.SUCCESS
+			})
+		}
 
 		set(() => ({ apiState: res }))
-	}
+	},
+
+	clearState: () => set({ apiState: STATES.IDLE, currentApis: undefined })
 }))

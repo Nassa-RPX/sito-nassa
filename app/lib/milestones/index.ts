@@ -37,8 +37,9 @@ export const mapNassaList = (
 	milestones: MilestonesCollection
 ): Array<NassaObj> => {
 	const mapNassa: Array<NassaObj> = milestones.items.map((milestone) => {
+		const id = milestone.fields.nassa[0].fields.id
 		return {
-			id: milestone.fields.nassa[0].fields.id,
+			id: id === 'nassa-onu' ? '' : id,
 			name: milestone.fields.nassa[0].fields.name
 		}
 	})

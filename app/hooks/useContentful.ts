@@ -3,6 +3,9 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { CONTENT_TYPE } from './../shared/contentful.d'
 
+import { STATES } from 'app/data/constants'
+import { useApiStore } from 'app/store/useApiStore'
+
 import { client } from 'pages/_app'
 
 export type API_STATE = 'idle' | 'loading' | 'success' | 'error'
@@ -14,7 +17,6 @@ export type Arguments = {
 
 export type ReturnType<T> = {
 	content?: EntryCollection<T>
-	apiState: API_STATE
 	error?: string
 }
 
@@ -22,24 +24,31 @@ export const useContentful = <T>({
 	type,
 	fire = true
 }: Arguments): ReturnType<T> => {
-	const [apiState, setApiState] = useState<API_STATE>('idle')
 	const [content, setContent] = useState<EntryCollection<T> | undefined>(
 		undefined
 	)
 
+	const [localState, setLocalState] = useState<API_STATE>('idle')
+
+	useEffect(() => {
+		setApiState(type, localState)
+	}, [localState])
+
+	const { setApiState } = useApiStore()
+
 	const [error, setError] = useState<string>()
 
 	const call = useCallback(() => {
-		setApiState('loading')
+		setLocalState(STATES.IDLE)
 		client
 			.getEntries<T>({ content_type: type })
 			.then((results) => {
 				setContent(results)
-				setApiState('success')
+				setLocalState(STATES.SUCCESS)
 			})
 			.catch((e: string) => {
 				setError(e)
-				setApiState('error')
+				setLocalState(STATES.ERROR)
 			})
 	}, [type])
 
@@ -47,5 +56,5 @@ export const useContentful = <T>({
 		if (fire) call()
 	}, [fire, call])
 
-	return { content, error, apiState }
+	return { content, error }
 }

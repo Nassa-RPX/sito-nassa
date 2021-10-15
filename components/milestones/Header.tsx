@@ -11,6 +11,8 @@ type Props = {
 export const Header = ({ current = 'nassa-onu' }: Props): JSX.Element => {
 	const { list } = useMilestoneStore()
 
+	console.log('list', list)
+
 	return (
 		<Base>
 			<MilestoneHeader>

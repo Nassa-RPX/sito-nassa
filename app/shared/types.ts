@@ -1,7 +1,11 @@
 import { EntryCollection } from 'contentful'
 import React from 'react'
 
-import { IMilestonesFields } from './contentful'
+import {
+	IIntroductionFields,
+	IMilestonesFields,
+	INassaFields
+} from './contentful'
 
 export type Children = { children: React.ReactNode }
 
@@ -18,6 +22,8 @@ export type ContentfulImage = {
 }
 
 export type MilestonesCollection = EntryCollection<IMilestonesFields>
+export type NassaCollection = EntryCollection<INassaFields>
+export type IntroductionCollection = EntryCollection<IIntroductionFields>
 
 export type MilestoneNassa = Record<
 	string,

@@ -3,28 +3,33 @@ import styled from 'styled-components'
 
 import { useMilestoneStore } from 'app/store/useMilestoneStore'
 
+import { Page } from 'components/Page'
 import { Header } from 'components/milestones/Header'
 import { MilestoneContainer } from 'components/milestones/MilestoneContainer'
 
 const Milestones = (): JSX.Element => {
 	const { map } = useMilestoneStore()
 
+	console.log('MILESTONES INDEX')
+
 	const SuccessView = () => {
 		return (
-			<Base>
-				<Header />
-				<MilestoneSection>
-					{map &&
-						map['nassa-onu'].map((milestone, idx) => (
-							<MilestoneSmall
-								position={idx % 2 === 0 ? 'right' : 'left'}
-								key={milestone.date}
-							>
-								{milestone.title}
-							</MilestoneSmall>
-						))}
-				</MilestoneSection>
-			</Base>
+			<Page>
+				<Base>
+					<Header />
+					<MilestoneSection>
+						{map &&
+							map['nassa-onu'].map((milestone, idx) => (
+								<MilestoneSmall
+									position={idx % 2 === 0 ? 'right' : 'left'}
+									key={milestone.date}
+								>
+									{milestone.title}
+								</MilestoneSmall>
+							))}
+					</MilestoneSection>
+				</Base>
+			</Page>
 		)
 	}
 
