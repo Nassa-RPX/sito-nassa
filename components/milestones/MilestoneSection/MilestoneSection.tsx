@@ -25,7 +25,6 @@ export const MilestoneSection = ({ nassa }: Props): JSX.Element => {
 	const baseHeightRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		console.log('reffing')
 		if (baseHeightRef.current)
 			setTimelineHeight(baseHeightRef.current.clientHeight)
 	}, [baseHeightRef.current])
