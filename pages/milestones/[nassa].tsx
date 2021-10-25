@@ -33,8 +33,14 @@ const Milestones = (): JSX.Element => {
 	const SuccessView = () => {
 		return (
 			<Base>
-				<Header />
-				<MilestoneSection nassa={map ? map['nassa-onu'] : undefined} />
+				<Header current={typeof nassa === 'string' ? nassa : 'nassa-onu'} />
+				<MilestoneSection
+					nassa={
+						map
+							? map[typeof nassa === 'string' ? nassa : 'nassa-onu']
+							: undefined
+					}
+				/>
 			</Base>
 		)
 	}

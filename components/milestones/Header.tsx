@@ -8,8 +8,12 @@ type Props = {
 	current?: string
 }
 
-export const Header = ({ current = '' }: Props): JSX.Element => {
+export const Header = ({ current }: Props): JSX.Element => {
 	const { list } = useMilestoneStore()
+
+	console.log('list-current', current)
+
+	console.log('list', list)
 
 	return (
 		<Base>
