@@ -7,9 +7,24 @@ import styled from 'styled-components'
 import { MobileNav } from './MobileNav/MobileNav'
 
 import { pages } from 'app/data/pages'
+import { getSubstr } from 'app/utils/getSubstr'
 
 export const Navbar = React.forwardRef<HTMLDivElement>((props, ref) => {
 	const router = useRouter()
+
+	const isPath = (pageUrl: string) => {
+		if (router.asPath === pageUrl) return true
+
+		const pathname = router.pathname
+		const isDynamic = pathname[pathname.length - 1] === ']' ? true : false
+
+		if (!isDynamic) return false
+
+		const trimmedPathname = getSubstr(pathname)
+		const trimmedPageUrl = getSubstr(pageUrl)
+
+		return trimmedPathname === trimmedPageUrl
+	}
 
 	return (
 		<Base>
@@ -26,7 +41,7 @@ export const Navbar = React.forwardRef<HTMLDivElement>((props, ref) => {
 				<Pages>
 					{pages.map((page, i) => (
 						<Link key={i} href={page.url} passHref>
-							<span className={router.pathname === page.url ? 'active' : ''}>
+							<span className={isPath(page.url) ? 'active' : ''}>
 								{page.name}
 							</span>
 						</Link>
