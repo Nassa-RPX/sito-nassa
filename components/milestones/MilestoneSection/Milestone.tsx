@@ -24,6 +24,7 @@ export const Milestone = ({
 }: Props): JSX.Element => {
 	const [boxHeight, setBoxHeight] = useState<number>(0)
 	const [boxWidth, setBoxWidth] = useState<number>(0)
+	const [position, setPosition] = useState<Position>('left')
 	const milestoneBoxRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
@@ -33,37 +34,38 @@ export const Milestone = ({
 		}
 	}, [milestoneBoxRef.current])
 
-	const rightOrLeft = (currentPosition: number): Position =>
-		currentPosition % 2 === 0 ? 'left' : 'right'
+	useEffect(() => {
+		setPosition(positionInList % 2 === 0 ? 'left' : 'right')
+	}, [positionInList])
 
 	return (
-		<Base position={rightOrLeft(positionInList)}>
+		<Base position={position}>
 			<MilestoneBall />
 
-			<Box
-				position={rightOrLeft(positionInList)}
-				height={boxHeight}
-				width={boxWidth}
-			>
+			<Box position={position} height={boxHeight} width={boxWidth}>
 				{!milestone.description && (
 					<MilestoneSmall
 						ref={milestoneBoxRef}
-						position={rightOrLeft(positionInList)}
+						position={position}
 						height={boxHeight}
 						key={milestone.date}
 					>
-						<MilestoneTitle small>{milestone.title}</MilestoneTitle>
+						<MilestoneTitle position={position} small>
+							{milestone.title}
+						</MilestoneTitle>
 					</MilestoneSmall>
 				)}
 
 				{milestone.description && (
 					<MilestoneBig
 						ref={milestoneBoxRef}
-						position={rightOrLeft(positionInList)}
+						position={position}
 						height={boxHeight}
 						key={milestone.date}
 					>
-						<MilestoneTitle>{milestone.title}</MilestoneTitle>
+						<MilestoneTitle position={position}>
+							{milestone.title}
+						</MilestoneTitle>
 						<MilestoneDescription>{milestone.description}</MilestoneDescription>
 					</MilestoneBig>
 				)}

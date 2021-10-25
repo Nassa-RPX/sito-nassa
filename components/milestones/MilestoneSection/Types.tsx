@@ -3,9 +3,13 @@ import styled from 'styled-components'
 
 import { Position } from './Milestone'
 
-export const MilestoneTitle = styled.h3<{ small?: boolean }>`
+export const MilestoneTitle = styled.h3<{
+	small?: boolean
+	position?: Position
+}>`
 	font-size: ${({ theme }) => theme.typo.size.heading3};
 	font-weight: bold;
+	text-align: ${(props) => props.position || 'left'};
 
 	margin-bottom: ${(props) =>
 		props.small ? 'inherit' : props.theme.spacing(0.4)};
@@ -25,7 +29,7 @@ export const MilestoneBase = styled.div<{ position: Position; height: number }>`
 	padding: ${({ theme }) => theme.spacing(1)};
 	border-radius: 4px;
 	position: relative;
-	max-width: 300px;
+	width: 300px;
 
 	${up('lg')} {
 		padding: ${(props) =>
@@ -38,8 +42,6 @@ export const MilestoneBase = styled.div<{ position: Position; height: number }>`
 export const MilestoneSmall = styled(MilestoneBase)`
 	background: ${({ theme }) => theme.palette.whiteNassa};
 	border: 4px solid ${({ theme }) => theme.palette.blueNassa};
-
-	position: relative;
 
 	${up('lg')} {
 		&:after {
@@ -64,8 +66,6 @@ export const MilestoneSmall = styled(MilestoneBase)`
 export const MilestoneBig = styled(MilestoneBase)`
 	background: ${({ theme }) => theme.palette.blueNassa};
 	border: 4px solid ${({ theme }) => theme.palette.blueNassa};
-
-	position: relative;
 
 	${up('lg')} {
 		&:after {
