@@ -18,6 +18,7 @@ export type Arguments = {
 export type ReturnType<T> = {
 	content?: EntryCollection<T>
 	error?: string
+	state: API_STATE
 }
 
 export const useContentful = <T>({
@@ -56,5 +57,5 @@ export const useContentful = <T>({
 		if (fire) call()
 	}, [fire, call])
 
-	return { content, error }
+	return { content, error, state: localState }
 }

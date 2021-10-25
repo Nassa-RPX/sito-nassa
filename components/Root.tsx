@@ -41,7 +41,7 @@ export const Root = ({ children }: Children) => {
 		}
 
 		getHeight()
-	}, [isMobile])
+	}, [isMobile()])
 
 	return (
 		<ThemeProvider theme={theme}>

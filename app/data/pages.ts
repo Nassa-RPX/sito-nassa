@@ -20,7 +20,7 @@ export const pages: Pages = [
 
 	{
 		name: 'Milestones',
-		url: '/milestones'
+		url: '/milestones/nassa-onu'
 	}
 ]
 

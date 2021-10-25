@@ -1,11 +1,11 @@
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 type Arguments = {
 	lock: boolean
 }
 
 export const useLockScroll = ({ lock }: Arguments): void => {
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (lock) {
 			// Get original body overflow
 			const originalStyle = window.getComputedStyle(document.body).overflow
