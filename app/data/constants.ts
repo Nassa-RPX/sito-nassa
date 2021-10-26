@@ -4,3 +4,5 @@ export enum STATES {
 	ERROR = 'error',
 	IDLE = 'idle'
 }
+
+export const MOBILE_NAV_ELEVATION = 3000

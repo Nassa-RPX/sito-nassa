@@ -9,6 +9,7 @@ import { Button } from './Button'
 import { Navigation } from './List'
 import { backgroundVariant } from './variants'
 
+import { MOBILE_NAV_ELEVATION } from 'app/data/constants'
 import { useDimensions } from 'app/hooks/useDimensions'
 import { useLockScroll } from 'app/hooks/useLockScroll'
 
@@ -31,6 +32,7 @@ export const MobileNav = () => {
 			animate={isOpen ? 'open' : 'closed'}
 			custom={height}
 			ref={containerRef}
+			raise={MOBILE_NAV_ELEVATION}
 		>
 			<Background variants={backgroundVariant} />
 			<Navigation isOpen={isOpen} toggle={() => toggleAnimation()} />
@@ -39,13 +41,14 @@ export const MobileNav = () => {
 	)
 }
 
-const Nav = styled(motion.nav)`
+const Nav = styled(motion.nav)<{ raise: number }>`
 	pointer-events: none;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	width: 100vw;
+	z-index: ${(props) => props.raise};
 
 	${up('xl')} {
 		display: none;
