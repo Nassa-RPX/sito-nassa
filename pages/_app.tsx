@@ -1,4 +1,5 @@
 import { createClient } from 'contentful'
+import 'dayjs/locale/it'
 import type { AppProps } from 'next/app'
 import 'public/assets/reset.css'
 import 'public/styles.css'

@@ -9,15 +9,20 @@ export const MilestoneTitle = styled.h3<{
 }>`
 	font-size: ${({ theme }) => theme.typo.size.heading3};
 	font-weight: bold;
-	text-align: ${(props) => props.position || 'left'};
 
 	margin-bottom: ${(props) =>
 		props.small ? 'inherit' : props.theme.spacing(0.4)};
+
+	text-align: center;
 
 	color: ${(props) =>
 		props.small
 			? props.theme.palette.blueNassa
 			: props.theme.palette.whiteNassa};
+
+	${up('lg')} {
+		text-align: ${(props) => props.position || 'left'};
+	}
 `
 
 export const MilestoneDescription = styled.div`
