@@ -17,7 +17,6 @@ export const MobileNav = () => {
 	const [isOpen, toggleOpen] = useCycle(false, true)
 	const containerRef = useRef(null)
 	const { height } = useDimensions(containerRef)
-	const scrollTo = useScrollTo()
 
 	useLockScroll({ lock: isOpen })
 
