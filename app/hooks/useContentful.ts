@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { CONTENT_TYPE } from './../shared/contentful.d'
 
 import { STATES } from 'app/data/constants'
-import { useApiStore } from 'app/store/useApiStore'
 
 import { client } from 'pages/_app'
 
@@ -30,12 +29,6 @@ export const useContentful = <T>({
 	)
 
 	const [localState, setLocalState] = useState<API_STATE>('idle')
-
-	useEffect(() => {
-		setApiState(type, localState)
-	}, [localState])
-
-	const { setApiState } = useApiStore()
 
 	const [error, setError] = useState<string>()
 
