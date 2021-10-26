@@ -1,7 +1,7 @@
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
-import { Position } from './Milestone'
+import { Position } from 'app/shared/types'
 
 export const MilestoneBase = styled.div<{ position: Position; height: number }>`
 	padding: ${({ theme }) => theme.spacing(1)};

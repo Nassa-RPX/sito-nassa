@@ -2,6 +2,42 @@
 import { Document } from '@contentful/rich-text-types'
 import { Asset, Entry } from 'contentful'
 
+export interface IContactsFields {
+	/** name */
+	name?: string | undefined
+
+	/** mail */
+	mail: string
+
+	/** instagram */
+	instagram?: string | undefined
+
+	/** facebook */
+	facebook?: string | undefined
+
+	/** phone */
+	phone?: string | undefined
+}
+
+/** Contatti di ciascun nassa */
+
+export interface IContacts extends Entry<IContactsFields> {
+	sys: {
+		id: string
+		type: string
+		createdAt: string
+		updatedAt: string
+		locale: string
+		contentType: {
+			sys: {
+				id: 'contacts'
+				linkType: 'ContentType'
+				type: 'Link'
+			}
+		}
+	}
+}
+
 export interface IIntroductionFields {
 	/** logoNassa */
 	logoNassa: Asset
@@ -95,7 +131,7 @@ export interface INassa extends Entry<INassaFields> {
 	}
 }
 
-export type CONTENT_TYPE = 'introduction' | 'milestones' | 'nassa'
+export type CONTENT_TYPE = 'contacts' | 'introduction' | 'milestones' | 'nassa'
 
 export type LOCALE_CODE = 'en-US'
 

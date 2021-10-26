@@ -34,3 +34,5 @@ export type NassaObj = {
 	id: string
 	name: string
 }
+
+export type Position = 'right' | 'left'

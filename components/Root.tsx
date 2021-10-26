@@ -36,7 +36,7 @@ export const Root = ({ children }: Children) => {
 		const getHeight = () => {
 			const { current } = ref
 			if (!current || !current.clientHeight) return
-			const shift = isMobile() ? 0.2 : 0.4
+			const shift = isMobile() ? 0.2 : 0.5
 			setNavHeight(current.clientHeight - current.clientHeight * shift)
 		}
 

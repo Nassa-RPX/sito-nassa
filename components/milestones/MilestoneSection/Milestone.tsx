@@ -14,14 +14,14 @@ import {
 } from './Types'
 
 import { IMilestonesFields } from 'app/shared/contentful'
+import { Position } from 'app/shared/types'
 import { capitalize } from 'app/utils/capitalize'
+import { getPosition } from 'app/utils/getPosition'
 
 export type Props = {
 	milestone: Omit<IMilestonesFields, 'nassa'>
 	positionInList: number
 }
-
-export type Position = 'right' | 'left'
 
 export const Milestone = ({
 	milestone,
@@ -40,7 +40,7 @@ export const Milestone = ({
 	}, [milestoneBoxRef.current])
 
 	useEffect(() => {
-		setPosition(positionInList % 2 === 0 ? 'left' : 'right')
+		setPosition(getPosition(positionInList))
 	}, [positionInList])
 
 	const formatDate = (date: string | undefined) => {
