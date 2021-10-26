@@ -11,7 +11,7 @@ export const backgroundVariant = {
 		x: 0,
 		clipPath: 'circle(0px at 89% 40px)',
 		transition: {
-			delay: 0.5,
+			delay: 0.05,
 			type: 'spring',
 			stiffness: 400,
 			damping: 40

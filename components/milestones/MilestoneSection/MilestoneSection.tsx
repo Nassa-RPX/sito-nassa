@@ -21,6 +21,14 @@ export type TypeNumber = {
 
 export const MilestoneSection = ({ nassa }: Props): JSX.Element => {
 	const [timelineHeight, setTimelineHeight] = useState<number>(0)
+	const [timelineDuration, setTimelineDuration] = useState<number>(0)
+
+	useEffect(() => {
+		const nassaLength = nassa ? nassa.length - 1 : 1
+		const duration = 0.5 * nassaLength
+
+		setTimelineDuration(duration < 3 ? duration : 3)
+	}, [])
 
 	const baseHeightRef = useRef<HTMLDivElement>(null)
 
@@ -34,8 +42,8 @@ export const MilestoneSection = ({ nassa }: Props): JSX.Element => {
 			<MilestoneTimeline
 				initial={{ height: 0 }}
 				animate={{ height: timelineHeight }}
+				transition={{ duration: timelineDuration }}
 			/>
-
 			{nassa &&
 				nassa.map((milestone, idx) => (
 					<Milestone key={idx} milestone={milestone} positionInList={idx} />
@@ -59,4 +67,5 @@ const MilestoneTimeline = styled(motion.span)`
 	top: -10px;
 	left: 50%;
 	transform: translateX(-50%);
+	border-radius: 10px;
 `

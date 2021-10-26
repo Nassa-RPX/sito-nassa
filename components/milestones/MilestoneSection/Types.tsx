@@ -3,33 +3,6 @@ import styled from 'styled-components'
 
 import { Position } from './Milestone'
 
-export const MilestoneTitle = styled.h3<{
-	small?: boolean
-	position?: Position
-}>`
-	font-size: ${({ theme }) => theme.typo.size.heading3};
-	font-weight: bold;
-
-	margin-bottom: ${(props) =>
-		props.small ? 'inherit' : props.theme.spacing(0.4)};
-
-	text-align: center;
-
-	color: ${(props) =>
-		props.small
-			? props.theme.palette.blueNassa
-			: props.theme.palette.whiteNassa};
-
-	${up('lg')} {
-		text-align: ${(props) => props.position || 'left'};
-	}
-`
-
-export const MilestoneDescription = styled.div`
-	color: ${({ theme }) => theme.palette.lightBlueNassa};
-	font-size: ${({ theme }) => theme.typo.size.detail};
-`
-
 export const MilestoneBase = styled.div<{ position: Position; height: number }>`
 	padding: ${({ theme }) => theme.spacing(1)};
 	border-radius: 4px;
@@ -87,6 +60,33 @@ export const MilestoneBig = styled(MilestoneBase)`
 				${(props) => (props.position === 'right' ? 'rotate(180deg)' : '')};
 		}
 	}
+`
+
+export const MilestoneTitle = styled.h3<{
+	small?: boolean
+	position?: Position
+}>`
+	font-size: ${({ theme }) => theme.typo.size.heading3};
+	font-weight: bold;
+
+	margin-bottom: ${(props) =>
+		props.small ? 'inherit' : props.theme.spacing(0.4)};
+
+	text-align: center;
+
+	color: ${(props) =>
+		props.small
+			? props.theme.palette.blueNassa
+			: props.theme.palette.whiteNassa};
+
+	${up('lg')} {
+		text-align: ${(props) => props.position || 'left'};
+	}
+`
+
+export const MilestoneDescription = styled.div`
+	color: ${({ theme }) => theme.palette.lightBlueNassa};
+	font-size: ${({ theme }) => theme.typo.size.detail};
 `
 
 export const MilestoneDate = styled.span<{ position: Position }>`

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { motion } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
@@ -47,8 +48,19 @@ export const Milestone = ({
 	}
 
 	return (
-		<Base position={position}>
-			<MilestoneBall />
+		<Base
+			initial={{ opacity: 0, translateX: positionInList % 2 === 0 ? -50 : 50 }}
+			animate={{ opacity: 1, translateX: 0 }}
+			transition={{ duration: 0.5, delay: positionInList * 0.5 }}
+			position={position}
+		>
+			<MilestoneBall
+				whileHover={{
+					border: '8px solid #0075BF',
+					transition: { duration: 0.5 }
+				}}
+			/>
+
 			{milestone.date && (
 				<MilestoneDate position={position}>
 					{formatDate(milestone.date)}
@@ -89,12 +101,12 @@ export const Milestone = ({
 	)
 }
 
-const Base = styled.div<{ position: Position }>`
+const Base = styled(motion.div)<{ position: Position }>`
 	position: relative;
 	margin-bottom: ${({ theme }) => theme.spacing(1)};
 `
 
-const MilestoneBall = styled.span`
+const MilestoneBall = styled(motion.span)`
 	width: 30px;
 	height: 30px;
 	background-color: ${({ theme }) => theme.palette.whiteNassa};
@@ -102,6 +114,7 @@ const MilestoneBall = styled.span`
 	border: 4px solid ${({ theme }) => theme.palette.blueNassa};
 
 	z-index: 3;
+	cursor: pointer;
 
 	left: 50%;
 	top: 40px;
