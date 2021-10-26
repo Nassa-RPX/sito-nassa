@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import React from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
@@ -28,10 +29,18 @@ export const Hero = ({ introductionInfo }: Props): JSX.Element => {
 
 		return (
 			<HeroBase height={height} direction={'row'}>
-				<Banner>
+				<Banner
+					initial={{ translateX: -200, opacity: 0 }}
+					animate={{ translateX: 0, opacity: 1 }}
+					transition={{ duration: 0.5 }}
+				>
 					<Image file={imageFile} alt={'Benvenuti in Nassa'} />
 				</Banner>
-				<Data>
+				<Data
+					initial={{ translateX: 200, opacity: 0 }}
+					animate={{ translateX: 0, opacity: 1 }}
+					transition={{ duration: 0.5 }}
+				>
 					<Info>
 						<Title>{introductionData.fields.welcome}</Title>
 						<Sub>{introductionData.fields.text[0]}</Sub>
@@ -57,7 +66,7 @@ const HeroBase = styled(Base)<HeroBaseProps>`
 	} */
 `
 
-const Banner = styled.div`
+const Banner = styled(motion.div)`
 	z-index: -2;
 	flex: 1;
 	position: relative;
@@ -74,7 +83,7 @@ const Banner = styled.div`
 	}
 `
 
-const Data = styled.div`
+const Data = styled(motion.div)`
 	flex: 1;
 	height: 100%;
 	font-size: ${({ theme }) => theme.typo.size.heading3};
