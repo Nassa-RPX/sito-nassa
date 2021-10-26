@@ -3,6 +3,7 @@ import React from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
+import { useMobile } from 'app/hooks/useMobile'
 import { IntroductionCollection } from 'app/shared/types'
 import { getImageInfo } from 'app/utils/getImageInfo'
 
@@ -15,6 +16,8 @@ type Props = {
 }
 
 export const Hero = ({ introductionInfo }: Props): JSX.Element => {
+	const { isMobile } = useMobile()
+
 	/* ----------------------------- SUB COMPONENTS ----------------------------- */
 
 	const SuccessView = () => {
@@ -37,7 +40,7 @@ export const Hero = ({ introductionInfo }: Props): JSX.Element => {
 					<Image file={imageFile} alt={'Benvenuti in Nassa'} />
 				</Banner>
 				<Data
-					initial={{ translateX: 200, opacity: 0 }}
+					initial={{ translateX: isMobile() ? -200 : 200, opacity: 0 }}
 					animate={{ translateX: 0, opacity: 1 }}
 					transition={{ duration: 0.5 }}
 				>

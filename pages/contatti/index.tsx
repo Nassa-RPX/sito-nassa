@@ -7,10 +7,10 @@ import { IContactsFields } from 'app/shared/contentful'
 import { getPosition } from 'app/utils/getPosition'
 
 import { Error } from 'components/Error'
-import { Base } from 'components/Layout'
 import { Loading } from 'components/Loading'
 import { Contact } from 'components/contacts/Contact'
 import { ContactContainer } from 'components/contacts/ContactContainer'
+import { ContactSection } from 'components/contacts/ContactSection'
 
 const Contacts = (): JSX.Element => {
 	const { content, state, error } = useContentful<IContactsFields>({
@@ -19,21 +19,9 @@ const Contacts = (): JSX.Element => {
 
 	const Success = () => {
 		return (
-			<Base direction={'column'}>
+			<Base>
 				<PageTitle>Contatti</PageTitle>
-				<ContactMain>
-					{content &&
-						content.items
-							.reverse()
-							.map((contact, i) => (
-								<Contact
-									key={i}
-									contact={contact.fields}
-									p={getPosition(i)}
-									order={i}
-								/>
-							))}
-				</ContactMain>
+				<ContactSection contacts={content} />
 			</Base>
 		)
 	}
@@ -49,14 +37,19 @@ const Contacts = (): JSX.Element => {
 
 export default Contacts
 
+const Base = styled.main`
+	display: flex;
+	flex-direction: column;
+`
+
 const PageTitle = styled.h1`
 	font-size: ${({ theme }) => theme.typo.size.heading1};
 	color: ${({ theme }) => theme.palette.blueNassa};
 	font-family: ${({ theme }) => theme.typo.family.heading};
+	margin-bottom: ${({ theme }) => theme.spacing(6)};
 `
 
 const ContactMain = styled.section`
 	width: 80%;
 	margin: 0 auto;
-	margin-top: ${({ theme }) => theme.spacing(6)};
 `

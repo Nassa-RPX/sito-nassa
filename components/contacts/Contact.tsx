@@ -1,42 +1,61 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { up } from 'styled-breakpoints'
 import styled from 'styled-components'
 
 import { Info } from './Info'
 
+import { useMobile } from 'app/hooks/useMobile'
 import { IContactsFields } from 'app/shared/contentful'
 import { Position } from 'app/shared/types'
+import { getPosition } from 'app/utils/getPosition'
 
 import { Base } from 'components/Layout'
 
 type Props = {
 	contact: IContactsFields
-	p: Position
 	order: number
 }
 
-export const Contact = ({ contact, p, order }: Props): JSX.Element => {
+export const Contact = ({ contact, order }: Props): JSX.Element => {
+	const [position, setPosition] = useState<Position>('left')
+	const { isMobile } = useMobile()
+
+	useEffect(() => {
+		setPosition(getPosition(order))
+	}, [])
+
 	return (
 		<Box
-			position={p}
-			initial={{ translateX: p === 'left' ? 200 : -200, opacity: 0 }}
-			animate={{ translateX: 0, opacity: 1 }}
+			position={position}
+			initial={{
+				opacity: 0,
+				x: isMobile() || position === 'right' ? -200 : 200
+			}}
+			animate={{ opacity: 1, x: 0 }}
 			transition={{ duration: 0.5, delay: order * 0.5 }}
 		>
 			<ContactBase direction={'column'} margin={{ bottom: 2 }}>
-				<Name position={p}>{contact.name}</Name>
+				<Name position={position}>{contact.name}</Name>
 				<Line
 					initial={{ width: 0 }}
 					animate={{ width: '100%' }}
 					transition={{ duration: 0.5, delay: order + 0.5 * 0.2 }}
 				/>
 
-				<ContactInfo position={p}>
-					<Info position={p} type={'mail'} content={contact.mail} />
-					<Info position={p} type={'instagram'} content={contact.instagram} />
-					<Info position={p} type={'facebook'} content={contact.facebook} />
-					<Info position={p} type={'phone'} content={contact.phone} />
+				<ContactInfo position={position}>
+					<Info position={position} type={'mail'} content={contact.mail} />
+					<Info
+						position={position}
+						type={'instagram'}
+						content={contact.instagram}
+					/>
+					<Info
+						position={position}
+						type={'facebook'}
+						content={contact.facebook}
+					/>
+					<Info position={position} type={'phone'} content={contact.phone} />
 				</ContactInfo>
 			</ContactBase>
 		</Box>
@@ -44,6 +63,7 @@ export const Contact = ({ contact, p, order }: Props): JSX.Element => {
 }
 
 const Box = styled(motion.div)<{ position: Position }>`
+	position: relative;
 	width: 100%;
 	display: flex;
 	justify-content: ${(props) =>
