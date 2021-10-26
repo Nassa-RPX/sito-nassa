@@ -7,7 +7,9 @@ import {
 	MilestoneBig,
 	MilestoneDescription,
 	MilestoneSmall,
-	MilestoneTitle
+	MilestoneTitle,
+	MilestoneDate,
+	MobileDate
 } from './Types'
 
 import { IMilestonesFields } from 'app/shared/contentful'
@@ -123,36 +125,5 @@ const Box = styled.div<{ position: Position; height: number; width: number }>`
 		margin-right: ${(props) =>
 			props.position === 'right' ? props.width + 'px' : 'inherit'};
 		margin-top: inherit;
-	}
-`
-
-const MilestoneDate = styled.span<{ position: Position }>`
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(calc(-50% - 100px), -50%);
-	transform: ${(props) =>
-		props.position === 'left'
-			? 'translate(calc(-50% - 100px), -50%)'
-			: 'translate(calc(-50% + 100px), -50%);'};
-	display: none;
-
-	${up('lg')} {
-		display: inline-block;
-	}
-`
-
-const MobileDate = styled.div<{ small?: boolean }>`
-	width: 100%;
-	text-align: center;
-	margin-bottom: ${({ theme }) => theme.spacing(0.5)};
-	font-size: ${({ theme }) => theme.typo.size.detail};
-	color: ${(props) =>
-		props.small
-			? props.theme.palette.grayNassa
-			: props.theme.palette.lightBlueNassa};
-
-	${up('lg')} {
-		display: none;
 	}
 `
